@@ -1,0 +1,154 @@
+#%RAML 1.0
+baseUri: https://anypoint.mulesoft.com/mocking/api/v1/links/873cd6d3-1f06-4b71-a89c-8fbe33f28311/ # 
+title: onlineShopping2
+version: 1.0
+uses:
+  library: /library/library.raml
+mediaType: [application/json]
+annotationTypes:
+  annotation: !include annotations/annotation.raml
+types:
+  users: !include types/users.raml
+  userid: !include types/userid.raml
+  uid: !include types/uid.raml
+  orders: !include types/orders.raml
+  orderid: !include types/orderid.raml
+  products: !include types/products.raml
+  productid: !include types/productid.raml
+  categories: !include types/categories.raml
+  categoriesid: !include types/categoriesid.raml
+  orderuid: !include types/orderuid.raml
+traits:
+  trait2104: !include trait/trait2104.raml
+  trait40134: !include trait/trait40134.raml
+securitySchemes:
+  security: !include security/security.raml
+documentation:
+  - !include documentation/document.raml
+
+
+/users:
+  get:
+    is:
+      - trait40134 
+    description: the API provides list of users
+    responses:
+      200:
+        body:
+          application/json:
+            example: !include examples/users.raml
+  post:
+    securedBy:
+      - security
+    is:
+      - trait2104
+    body:
+      application/json:
+        type: userid
+        example: !include examples/userid.raml
+    responses:
+      200:
+        body:
+          application/json:
+            example: !include examples/uid.raml
+
+  /user{id}:
+    get:
+      is:
+      - trait40134
+      responses:
+        200:
+          body:
+            application/json:
+              type: userid
+              example: !include examples/userid.raml
+    
+             
+/orders:
+  get:
+    is:
+      - trait40134
+    responses:
+      200:
+        body:
+          application/json:
+            type: array
+            example: !include examples/orders.raml
+      
+  post:
+    securedBy:
+      - security
+    is:
+      - trait2104
+    body:
+      application/json:
+        example:
+          {"productId": 145,  "quantity": 4587, "uid": 256}
+   
+  /order/{id}:
+    get:
+      is:
+      - trait40134
+      responses:
+        201:
+          body:
+            application/json:
+              type: orderid
+              example: !include examples/orderid.raml
+        
+
+  /order/{uid}:
+    get:
+      is:
+      - trait40134
+      responses:
+        201:
+          body:
+            application/json:
+              example: !include examples/orderuid.raml
+                              
+/products:
+  get:
+    is:
+      - trait40134
+    responses:
+      200:
+        body:
+          application/json:
+            type: products []
+            example: !include examples/products.raml
+     
+  /products/{id}:
+    get:
+      is:
+      - trait40134
+      responses:
+        200:
+          body:
+            application/json:
+              type: productid        
+              example: !include examples/productid.raml
+
+/categories:
+  get:
+    is:
+      - trait40134
+    responses:
+      200:
+        body:
+          application/json:
+            type: categories []
+            example: !include examples/categories.raml
+      
+  /categories/{id}:
+    get:
+      is:
+      - trait40134
+      responses:
+        200:
+          body:
+            application/json:
+              type: categoriesid
+              example: !include examples/categoriesid.raml
+              
+     
