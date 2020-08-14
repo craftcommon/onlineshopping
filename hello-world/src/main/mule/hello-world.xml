@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:tracking="http://www.mulesoft.org/schema/mule/ee/tracking" xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/mule/ee/tracking/current/mule-tracking-ee.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="63943aa3-1080-4e7a-956d-c8d9ce1e33dc" >
+		<http:listener-connection host="0.0.0.0" port="8081" />
+	</http:listener-config>
+	<flow name="hello-worldFlow" doc:id="6222e18a-9797-49b6-b53e-8f5af2bfe633" >
+		<http:listener doc:name="Listener" doc:id="4d5103e9-af65-4ea3-8fc9-4e1cdb63227f" config-ref="HTTP_Listener_config" path="/demo"/>
+		<set-variable value="Hello World" doc:name="Set Variable" doc:id="4f879bb3-eb9c-4b18-ae29-d7318ea0ddc9" variableName="var1"/>
+		<set-payload value="hello world craft soft bach" doc:name="Set Payload" doc:id="d43ff155-98fe-449b-91f4-e6ce81e124e5" />
+		<logger level="INFO" doc:name="Logger" doc:id="8028677a-b4e5-4ba8-a64c-60ce188b1601" message="my logger message"/>
+	</flow>
+</mule>
