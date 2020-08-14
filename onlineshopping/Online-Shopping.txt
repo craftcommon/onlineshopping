@@ -1,0 +1,214 @@
+xml version=1.0 encoding=UTF-8
+
+mule xmlnsee=httpwww.mulesoft.orgschemamuleeecore xmlnshttp=httpwww.mulesoft.orgschemamulehttp
+	xmlns=httpwww.mulesoft.orgschemamulecore
+	xmlnsdoc=httpwww.mulesoft.orgschemamuledocumentation xmlnsxsi=httpwww.w3.org2001XMLSchema-instance xsischemaLocation=httpwww.mulesoft.orgschemamulecore httpwww.mulesoft.orgschemamulecorecurrentmule.xsd
+httpwww.mulesoft.orgschemamulehttp httpwww.mulesoft.orgschemamulehttpcurrentmule-http.xsd
+httpwww.mulesoft.orgschemamuleeecore httpwww.mulesoft.orgschemamuleeecorecurrentmule-ee.xsd
+	httplistener-config name=HTTP_Listener_config1 docname=HTTP Listener config docid=76dd3f35-3009-412e-910f-31dd5df8926d 
+		httplistener-connection host=0.0.0.0 port=8081 
+	httplistener-config
+	flow name=getAllProducts docid=be0a3fda-5d86-4b5d-93b9-a030fcce33da 
+		httplistener docname=Listener docid=830024c0-c14b-44c1-90e5-a2ef80251d0f config-ref=HTTP_Listener_config1 path=products
+		eetransform docname=Transform Message docid=23fbb394-43dd-49f1-bda8-7095c889410e 
+			eemessage 
+				eeset-payload ![CDATA[%dw 2.0
+output applicationjson
+---
+[{
+      productid 1,
+      categoryid 15,
+      name DELL PC,
+      description CORE I 7,
+      video_url WWW.DELL.COM,
+      price 2000
+   },
+   {
+      productid 2,
+      categoryid 16,
+      name DELL PC,
+      description CORE I 7,
+      video_url WWW.DELL.COM,
+      price 2000
+   }]
+   
+]]eeset-payload
+			eemessage
+		eetransform
+	flow
+	flow name=getProductbyID docid=80f2ade9-2032-4f9d-9088-6397ebd1674a 
+		httplistener docname=Listener docid=97b5ed32-146b-41c2-8170-ffca68ff6ea2 config-ref=HTTP_Listener_config1 path=product{Id}
+		eetransform docname=Transform Message docid=db21490d-a4dc-452f-9a92-d92340c5420f 
+			eemessage 
+				eeset-payload ![CDATA[%dw 2.0
+output applicationjson
+---
+{
+    productid 3,
+    categoryid 17,
+    name DELL PC,
+    description CORE I 7,
+    video_url WWW.DELL.COM,
+    price 2000
+  }]]eeset-payload
+			eemessage
+		eetransform
+	flow
+	flow name=getAllUsers docid=5cb93473-34ff-4046-93a9-df32f9fbe686 
+		httplistener docname=Listener docid=99d27988-bbd2-457e-b751-bc01b9698358 config-ref=HTTP_Listener_config1 path=Users
+		eetransform docname=Transform Message docid=ac8aeef3-b6ea-4688-9153-584ca20dcfc5 
+			eemessage 
+				eeset-payload ![CDATA[%dw 2.0
+output applicationjson
+---
+[
+                  {
+	username Jake,
+	email fanbn@gmail.com
+},
+{
+	username Jame,
+	email fanbn@gmail.com
+},
+{
+	username Mark,
+	email fanbnnfjfj@gmail.com
+}
+              ]              ]]eeset-payload
+			eemessage
+		eetransform
+	flow
+	flow name=getUserbyID docid=576fb415-428d-4c4c-ad3a-126931afbb9c 
+		httplistener docname=Listener docid=519bd231-9db0-4879-8012-d038bd0376a2 config-ref=HTTP_Listener_config1 path=user{ID}
+		eetransform docname=Transform Message docid=4e5a1af3-9fe5-4230-b56b-d3839135cd84 
+			eemessage 
+				eeset-payload ![CDATA[%dw 2.0
+output applicationjson
+---
+{
+	username Jake,
+	email fanbn@gmail.com
+}]]eeset-payload
+			eemessage
+		eetransform
+	flow
+	flow name=postuser docid=487947aa-3bb3-4126-af6b-4da8cafe7081 
+		httplistener docname=Listener docid=d7563b29-5d20-402c-90d4-a557192d712a config-ref=HTTP_Listener_config1 path=postUser
+		eetransform docname=Transform Message docid=9bce32bb-db91-4067-9fa8-19d0c120f9a4 
+			eemessage 
+				eeset-payload ![CDATA[%dw 2.0
+output applicationjson
+---
+{
+	uid 1529
+}]]eeset-payload
+			eemessage
+		eetransform
+	flow
+	flow name=getAllCategories docid=9bf18a35-e803-4dec-9d28-80051a0ba933 
+		httplistener docname=Listener docid=fa0f5d1f-4cdf-4af9-b4e2-9bad3e716863 config-ref=HTTP_Listener_config1 path=categories
+		eetransform docname=Transform Message docid=a97e7edf-1bad-4958-8752-779606be71e3 
+			eemessage 
+				eeset-payload ![CDATA[%dw 2.0
+output applicationjson
+---
+[
+  {
+    categoryid 1,
+    name Beki
+  },
+  
+  {
+    categoryid 2,
+    name Samri
+  }
+]
+]]eeset-payload
+			eemessage
+		eetransform
+	flow
+	flow name=getCategorybyID docid=e19f75f3-7ba0-40f7-b251-7559bf3242c5 
+		httplistener docname=Listener docid=809e1701-ebfd-4e48-81dc-ea95b6facc97 config-ref=HTTP_Listener_config1 path=category{id}
+		eetransform docname=Transform Message docid=724847e8-baf3-499e-a098-b9994cbff6dc 
+			eemessage 
+				eeset-payload ![CDATA[%dw 2.0
+output applicationjson
+---
+ {
+        categoryid 1,
+         name Mark
+ }]]eeset-payload
+			eemessage
+		eetransform
+	flow
+	flow name=getAllOrders docid=ee83a259-4bd2-4b39-b33d-de8122c1962b 
+		httplistener docname=Listener docid=53f23c0b-afcc-44aa-b975-a385ee9afe28 config-ref=HTTP_Listener_config1 path=orders
+		eetransform docname=Transform Message docid=76a64d4f-7b3f-4e34-b7ea-ed9401b636bb 
+			eemessage 
+				eeset-payload ![CDATA[%dw 2.0
+output applicationjson
+---
+[
+                {
+                orderid 1333,
+                userid 1302,
+                addressid 201,
+                discountid 1,
+                created 1596410900731,
+                modified null,
+                status Accepted,
+                amount 1000
+                },
+                  orderid 1333,
+                userid 1302,
+                addressid 201,
+                discountid 1,
+                created 1596410900731,
+                modified null,
+                status Accepted,
+                amount 1000
+
+              ]]]eeset-payload
+			eemessage
+		eetransform
+	flow
+	flow name=postOrders docid=c557b91d-4d55-4afe-b008-585056b625b1 
+		httplistener docname=Listener docid=773aea9e-ff45-453d-83bd-1923b0d29779 config-ref=HTTP_Listener_config1 path=postOrder
+		eetransform docname=Transform Message docid=f4ce91dd-7a1f-48b2-b700-138c2565dffe 
+			eemessage 
+				eeset-payload ![CDATA[%dw 2.0
+output applicationjson
+---
+{
+  products [
+    {
+      productId 1,
+      quantity 2
+    }
+  ],
+  uid 3
+}]]eeset-payload
+			eemessage
+		eetransform
+	flow
+	flow name=getOrderbyID docid=91deb966-3b70-44fd-a599-1c8191d13d86 
+		httplistener docname=Listener docid=e3626633-f20b-4fa5-9606-2cee648a0ab2 config-ref=HTTP_Listener_config1 path=order{id}
+		eetransform docname=Transform Message docid=2a489da3-b8d9-457a-b029-2614c155e463 
+			eemessage 
+				eeset-payload ![CDATA[%dw 2.0
+output applicationjson
+---
+{
+                orderid 1333,
+                userid 1302,
+                addressid 201,
+                discountid 1,
+                created 1596410900731,
+                modified null,
+                status Accepted,
+                amount 1000
+    }]]eeset-payload
+			eemessage
+		eetransform
+	flow
+mule
