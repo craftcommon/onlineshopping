@@ -1,0 +1,220 @@
+#%RAML 1.0
+baseUri: https://anypoint.mulesoft.com/mocking/api/v1/links/c83ba85c-2180-43a4-bea7-36241f5ab733/ # 
+title: craft_online_shopping
+version: 1.0
+types:
+uses:
+  mylib: library.raml
+/users:
+  description: this is ueser resouse 
+  get:
+    queryParameters:
+      id:
+        description: id
+        type: integer
+        required: false
+      fullname :
+        description: fname and lname
+        type: string
+        enum:
+            [john,mik]
+        required: false
+      username:
+        description: username
+        maxLength: 10
+        minLength: 2
+        required: false
+        default: john
+    description: users resouse get HTTp users response
+    responses:
+      200:
+        body:
+          application/json:
+            type: mylib.users []
+            example: !includeexample/user.json
+  type:
+    mylib.Collection:
+      resourcepath: users
+    
+    #is: [resourcemessage]
+    is:
+      - mylib.responsemessage:
+        
+  post:
+    description: list of post stute code
+    responses:
+      200:
+        body:
+          application/json:
+            example:
+              {"uid": 1441
+              }
+    is:
+      - mylib.responsemessage:
+        
+/usersid:
+  get:
+    responses:
+      200:
+        body:
+          application/json:
+            example:  !include examples/usersid.json
+  type:
+    mylib.Collection:
+      resourcepath: usersid
+            
+  is:
+    - mylib.responsemessage:
+      
+      
+/products:
+  get:
+    responses:
+      200:
+        body:
+          application/json:
+            example: !include examples/products.raml
+  type:
+    mylib.Collection:
+      resourcepath: product
+             
+  is:
+    - mylib.responsemessage:
+      
+      
+/products/{id}:
+  get:
+    responses:
+      200:
+        body:
+          application/json:
+            example: !include examples/usersid.json
+  type:
+    mylib.Collection:
+      resourcepath: product id
+  is:
+    - mylib.responsemessage:
+      
+      
+              
+      
+/orders:
+  get:
+    responses:
+      200:
+        body:
+          application/json:
+            example: !include examples/orders.raml
+  type:
+    mylib.Collection:
+      resourcepath: orders
+    is:
+      - mylib.responsemessage:
+        
+        
+            
+      
+  post:
+    responses:
+     "200":
+        body:
+          application/json:
+            example:
+              {"uid": 1445
+              }
+    is:
+      - mylib.responsemessage:
+        
+        
+     
+/{ordersid}:
+  get:
+    responses:
+      200:
+        body:
+          application/json:
+            example: !include examples/usersid.json
+  type:
+    mylib.Collection:
+      resourcepath: orderid
+  is:
+    - mylib.responsemessage:
+      
+      
+              
+      
+/{ordersuid}:
+  get:
+    responses:
+      200:
+        body:
+          application/json:
+            example: !include examples/usersid.json
+  type:
+    mylib.Collection:
+      resourcepath: orderuid
+  is:
+    - mylib.responsemessage:
+      
+      
+             
+      
+/categories:
+  get:
+    responses:
+      200:
+        body:
+          application/json:
+            example: !include examples/categries.raml
+  type:
+    mylib.Collection:
+      resourcepath: categories
+  is:
+    - mylib.responsemessage:
+      
+      
+              
+     
+/catogary/{id}:
+  get:
+    responses:
+      200:
+        body:
+          application/json:
+            example: !include examples/usersid.json
+  type:
+    mylib.Collection:
+      resourcepath: categoryid
+  is:
+    - mylib.responsemessage:
+      
+      
+             
+      
+
+              
+
+
+
+              
+              
+
+    
+
+
+
+                         
+
+             
+                                
+              
+        
+   
+          
+                              
+            
+                                          
+
+                           
+
+            
